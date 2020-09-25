@@ -53,18 +53,16 @@ namespace Calculator
 
 			try
 			{
-				using (StreamReader file = new StreamReader(
-					DefaultPath, System.Text.Encoding.Default))
-				{
-					var projectText = file.ReadLine();
-					if (string.IsNullOrEmpty(projectText))
-					{
-						projectText = null;
-					}
+                using StreamReader file = new StreamReader(
+                    DefaultPath, System.Text.Encoding.Default);
+                var projectText = file.ReadLine();
+                if (string.IsNullOrEmpty(projectText))
+                {
+                    projectText = null;
+                }
 
-					project = JsonConvert.DeserializeObject<Project>(projectText);
-				}
-			}
+                project = JsonConvert.DeserializeObject<Project>(projectText);
+            }
 			catch (SerializationException)
 			{
 				return project;
@@ -89,12 +87,10 @@ namespace Calculator
 				CreatePath(_folder, _fileName);
 			}
 
-			using (StreamWriter file = new StreamWriter(
-				DefaultPath, false, System.Text.Encoding.UTF8))
-			{
-				file.Write(JsonConvert.SerializeObject(project));
-			}
-		}
+            using StreamWriter file = new StreamWriter(
+                DefaultPath, false, System.Text.Encoding.UTF8);
+            file.Write(JsonConvert.SerializeObject(project));
+        }
 
 		/// <summary>
 		/// Creates file along folder
@@ -122,6 +118,5 @@ namespace Calculator
 
 			DefaultPath = folder + fileName;
 		}
-	}
 	}
 }
