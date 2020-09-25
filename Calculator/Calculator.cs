@@ -40,11 +40,11 @@ namespace Calculator
 		/// <param name="operation"></param>
 		public Calculator(double firstNumber, double secondNumber,
 			Operation operation)
-        {
+		{
 			FirstNumber = firstNumber;
 			SecondNumber = secondNumber;
 			Operation = operation;
-        }
+		}
 
 		/// <summary>
 		/// <see cref="Calculate"/> <see cref="Result"/>
@@ -91,8 +91,8 @@ namespace Calculator
 		/// Override metod <see cref="ToString"/>
 		/// </summary>
 		/// <returns> <see cref="string"/> class</returns>
-        public override string ToString()
-        {
+		public override string ToString()
+		{
 			string operation;
 			switch (Operation)
 			{
@@ -129,6 +129,6 @@ namespace Calculator
 
 			return ($"{FirstNumber} {operation} {SecondNumber} = {Result} " +
 				TimeResult.ToString());
-        }
-    }
+		}
+	}
 }

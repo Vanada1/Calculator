@@ -10,9 +10,9 @@ using System.Runtime.Serialization;
 
 namespace Calculator
 {
-    class ProjectManager
-    {
-        /// <summary>
+	class ProjectManager
+	{
+		/// <summary>
 		/// File name
 		/// </summary>
 		private const string _fileName = "Calculator.notes";
@@ -44,33 +44,33 @@ namespace Calculator
 		/// Returns all data from file
 		/// </returns>
 		public static Project ReadProject()
-        {
-            Project project = new Project();
-            if (!File.Exists(DefaultPath))
-            {
-	            return project;
-            }
+		{
+			Project project = new Project();
+			if (!File.Exists(DefaultPath))
+			{
+				return project;
+			}
 
-            try
-            {
-	            using (StreamReader file = new StreamReader(
-		            DefaultPath, System.Text.Encoding.Default))
-	            {
-		            var projectText = file.ReadLine();
-		            if (string.IsNullOrEmpty(projectText))
-		            {
-			            projectText = null;
-		            }
+			try
+			{
+				using (StreamReader file = new StreamReader(
+					DefaultPath, System.Text.Encoding.Default))
+				{
+					var projectText = file.ReadLine();
+					if (string.IsNullOrEmpty(projectText))
+					{
+						projectText = null;
+					}
 
-		            project = JsonConvert.DeserializeObject<Project>(projectText);
-	            }
-            }
-            catch (SerializationException)
-            {
-	            return project;
-            }
+					project = JsonConvert.DeserializeObject<Project>(projectText);
+				}
+			}
+			catch (SerializationException)
+			{
+				return project;
+			}
 
-            return project;
+			return project;
 		}
 
 		/// <summary>
@@ -83,7 +83,7 @@ namespace Calculator
 		/// If <paramref name="path"/> is Null then take defult value
 		/// </param>
 		public static void SaveProject(Project project)
-        {
+		{
 			if(!File.Exists(DefaultPath))
 			{
 				CreatePath(_folder, _fileName);
@@ -92,16 +92,16 @@ namespace Calculator
 			using (StreamWriter file = new StreamWriter(
 				DefaultPath, false, System.Text.Encoding.UTF8))
 			{
-                file.Write(JsonConvert.SerializeObject(project));
+				file.Write(JsonConvert.SerializeObject(project));
 			}
-        }
+		}
 
-        /// <summary>
-        /// Creates file along folder
-        /// </summary>
-        /// <param name="folder">File location</param>
-        /// <param name="fileName">File name</param>
-        public static void CreatePath(string folder, string fileName)
+		/// <summary>
+		/// Creates file along folder
+		/// </summary>
+		/// <param name="folder">File location</param>
+		/// <param name="fileName">File name</param>
+		public static void CreatePath(string folder, string fileName)
 		{
 			if (folder == null)
 			{
@@ -123,5 +123,5 @@ namespace Calculator
 			DefaultPath = folder + fileName;
 		}
 	}
-    }
+	}
 }

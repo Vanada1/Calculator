@@ -22,14 +22,14 @@ namespace Calculator
 		{
 			List<Calculator> foundCalculators = new List<Calculator>();
 			foreach (var calculator in Calculators)
-            {
+			{
 				if((calculator.TimeResult.Year == time.Year) && 
 					(calculator.TimeResult.Month == time.Month) &&
 					(calculator.TimeResult.Day == time.Day))
-                {
+				{
 					foundCalculators.Add(calculator);
 				}
-            }
+			}
 
 			return foundCalculators;
 		}
