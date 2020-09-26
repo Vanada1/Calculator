@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 
-namespace Calculator
+namespace CalculatorApp
 {
 	class ProjectManager
 	{

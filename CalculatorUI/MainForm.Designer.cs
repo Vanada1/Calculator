@@ -40,14 +40,14 @@
             this.Button7 = new System.Windows.Forms.Button();
             this.Button8 = new System.Windows.Forms.Button();
             this.Button9 = new System.Windows.Forms.Button();
-            this.ButtonResever = new System.Windows.Forms.Button();
+            this.ButtonSignСhange = new System.Windows.Forms.Button();
             this.Button0 = new System.Windows.Forms.Button();
             this.ButtonDot = new System.Windows.Forms.Button();
             this.ButtonDev = new System.Windows.Forms.Button();
             this.ButtonMult = new System.Windows.Forms.Button();
             this.ButtonNegative = new System.Windows.Forms.Button();
             this.ButtonSum = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
+            this.ButtonPow = new System.Windows.Forms.Button();
             this.HistoryButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ClearButton = new System.Windows.Forms.Button();
@@ -174,15 +174,15 @@
             this.Button9.UseVisualStyleBackColor = true;
             this.Button9.Click += new System.EventHandler(this.Button9_Click);
             // 
-            // ButtonResever
+            // ButtonSignСhange
             // 
-            this.ButtonResever.Location = new System.Drawing.Point(3, 259);
-            this.ButtonResever.Name = "ButtonResever";
-            this.ButtonResever.Size = new System.Drawing.Size(62, 53);
-            this.ButtonResever.TabIndex = 0;
-            this.ButtonResever.Text = "+/-";
-            this.ButtonResever.UseVisualStyleBackColor = true;
-            this.ButtonResever.Click += new System.EventHandler(this.ButtonResever_Click);
+            this.ButtonSignСhange.Location = new System.Drawing.Point(3, 259);
+            this.ButtonSignСhange.Name = "ButtonSignСhange";
+            this.ButtonSignСhange.Size = new System.Drawing.Size(62, 53);
+            this.ButtonSignСhange.TabIndex = 0;
+            this.ButtonSignСhange.Text = "+/-";
+            this.ButtonSignСhange.UseVisualStyleBackColor = true;
+            this.ButtonSignСhange.Click += new System.EventHandler(this.ButtonSignСhange_Click);
             // 
             // Button0
             // 
@@ -246,17 +246,18 @@
             this.ButtonSum.Text = "+";
             this.ButtonSum.UseVisualStyleBackColor = true;
             // 
-            // button14
+            // ButtonPow
             // 
-            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.ButtonPow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button14.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button14.Location = new System.Drawing.Point(139, 23);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(62, 38);
-            this.button14.TabIndex = 0;
-            this.button14.Text = "^";
-            this.button14.UseVisualStyleBackColor = true;
+            this.ButtonPow.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonPow.Location = new System.Drawing.Point(139, 23);
+            this.ButtonPow.Name = "ButtonPow";
+            this.ButtonPow.Size = new System.Drawing.Size(62, 38);
+            this.ButtonPow.TabIndex = 0;
+            this.ButtonPow.Text = "^";
+            this.ButtonPow.UseVisualStyleBackColor = true;
+            this.ButtonPow.Click += new System.EventHandler(this.ButtonPow_Click);
             // 
             // HistoryButton
             // 
@@ -278,10 +279,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Controls.Add(this.ClearButton, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.ButtonDev, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button14, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ButtonPow, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.HistoryButton, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.Button0, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.ButtonResever, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.ButtonDot, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.ResultButton, 3, 4);
             this.tableLayoutPanel1.Controls.Add(this.Button8, 1, 3);
@@ -296,6 +296,7 @@
             this.tableLayoutPanel1.Controls.Add(this.Button2, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.Button1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.Button5, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ButtonSignСhange, 0, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 97);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
@@ -328,8 +329,9 @@
             this.ResultButton.TabIndex = 0;
             this.ResultButton.Text = "=";
             this.ResultButton.UseVisualStyleBackColor = true;
+            this.ResultButton.Click += new System.EventHandler(this.ResultButton_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
@@ -339,7 +341,7 @@
             this.Controls.Add(this.OperatorLabel);
             this.Controls.Add(this.FirstValueLabel);
             this.MaximumSize = new System.Drawing.Size(310, 460);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -362,14 +364,14 @@
         private System.Windows.Forms.Button Button7;
         private System.Windows.Forms.Button Button8;
         private System.Windows.Forms.Button Button9;
-        private System.Windows.Forms.Button ButtonResever;
+        private System.Windows.Forms.Button ButtonSignСhange;
         private System.Windows.Forms.Button Button0;
         private System.Windows.Forms.Button ButtonDot;
         private System.Windows.Forms.Button ButtonDev;
         private System.Windows.Forms.Button ButtonMult;
         private System.Windows.Forms.Button ButtonNegative;
         private System.Windows.Forms.Button ButtonSum;
-        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button ButtonPow;
         private System.Windows.Forms.Button HistoryButton;
         private System.Windows.Forms.Button t;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

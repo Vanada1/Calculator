@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Calculator;
+using CalculatorApp;
 
 namespace CalculatorUI
 {
@@ -91,7 +91,7 @@ namespace CalculatorUI
 			_project.Number += ".";
 		}
 
-		private void ButtonResever_Click(object sender, EventArgs e)
+		private void ButtonSignСhange_Click(object sender, EventArgs e)
         {
             _project.Number = _project.Number.Substring(0,1) != "-" ?
                 _project.Number.Insert(0, "-") : 
@@ -103,6 +103,51 @@ namespace CalculatorUI
             FirstValueLabel.Text = "";
             OperatorLabel.Text = "";
             _project.Number = "";
+			_project.CurrentCalculator = new Calculator();
+        }
+
+        private void ButtonPow_Click(object sender, EventArgs e)
+		{
+			if (_project.CurrentCalculator.Operation != Operation.None &&
+                _project.CurrentCalculator.FirstNumber != null)
+            {
+                _project.CurrentCalculator.Operation = Operation.Exponentiation;
+                return;
+            }
+
+			if (ValueTextBox.Text.Length == 0)
+            {
+                MessageBox.Show($"Enter the number", $"Error");
+				return;
+            }
+
+			_project.CurrentCalculator = new Calculator();
+
+			try
+            {
+                _project.CurrentCalculator.FirstNumber = double.Parse(ValueTextBox.Text);
+                _project.CurrentCalculator.Operation = Operation.Exponentiation;
+            }
+			catch (Exception exception)
+            {
+				MessageBox.Show(exception.Message, $"Error");
+			}
+        }
+
+        private void ResultButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _project.CurrentCalculator.SecondNumber = double.Parse(ValueTextBox.Text);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, $"Error");
+            }
+
+			_project.CurrentCalculator.Calculate();
+            ValueTextBox.Text = _project.CurrentCalculator.Result.ToString();
+
         }
     }
 }

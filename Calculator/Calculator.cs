@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Calculator
+namespace CalculatorApp
 {
 	/// <summary>
 	/// Main class of program 
@@ -10,17 +10,17 @@ namespace Calculator
 		/// <summary>
 		/// First number property
 		/// </summary>
-		public double FirstNumber { get; set; }
+		public double? FirstNumber { get; set; }
 
 		/// <summary>
 		/// Second number property
 		/// </summary>
-		public double SecondNumber { get; set; }
+		public double? SecondNumber { get; set; }
 
 		/// <summary>
 		/// Calculation <see cref="Result"/> property
 		/// </summary>
-		public double Result { get; private set; } = 0.0;
+		public double? Result { get; private set; } = 0.0;
 
 		/// <summary>
 		/// <see cref="Operation"/> property
@@ -45,6 +45,13 @@ namespace Calculator
 			SecondNumber = secondNumber;
 			Operation = operation;
 		}
+
+        public Calculator()
+        {
+            FirstNumber = null;
+            SecondNumber = null;
+            Operation = Operation.None;
+        }
 
 		/// <summary>
 		/// <see cref="Calculate"/> <see cref="Result"/>
@@ -75,14 +82,19 @@ namespace Calculator
 				}
 				case Operation.Exponentiation:
 				{
-					Result = Math.Pow(FirstNumber, SecondNumber);
+					Result = Math.Pow((double)FirstNumber, (double)SecondNumber);
 					break;
 				}
 				default:
 				{
-					throw new ArgumentException("Unknown comand");
+					throw new ArgumentException("Unknown command");
 				}
 			}
+
+            if (Result == null)
+            {
+                throw new Exception("Result is null");
+            }
 
 			TimeResult = DateTime.Now;
 		}

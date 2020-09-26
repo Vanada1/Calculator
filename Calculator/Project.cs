@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Calculator
+namespace CalculatorApp
 {
 	public class Project
     {
@@ -42,7 +42,8 @@ namespace Calculator
 		{
 			Calculators = calculators;
             Number = null;
-        }
+			CurrentCalculator = new Calculator();
+		}
 
 		/// <summary>
 		/// Default constructor for <see cref="Project"/> class
@@ -51,12 +52,13 @@ namespace Calculator
 		{
 			Calculators = new List<Calculator>();
             Number = null;
+            CurrentCalculator = new Calculator();
         }
 
 		/// <summary>
 		/// Activity the event when changed value element
 		/// </summary>
-        public event EventHandler NumberChanged;
+		public event EventHandler NumberChanged;
 
 		/// <summary>
 		/// Searches all calculations for a specific date
