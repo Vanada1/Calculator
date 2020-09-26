@@ -27,7 +27,7 @@ namespace CalculatorUI
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			_project.NumberChenged += OnNumberChanged;
+			_project.NumberChanged += OnNumberChanged;
             FirstValueLabel.Text = "";
             OperatorLabel.Text = "";
 		}
@@ -35,6 +35,7 @@ namespace CalculatorUI
 		{
 			_project.Number = ValueTextBox.Text;
 		}
+
 		private void Button1_Click(object sender, EventArgs e)
 		{
 			_project.Number += "1";

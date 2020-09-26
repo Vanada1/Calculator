@@ -24,10 +24,15 @@ namespace Calculator
                 if (Number != value)
                 {
                     _number = value;
-					NumberChenged.Invoke(this, new EventArgs());
+					NumberChanged.Invoke(this, new EventArgs());
                 }
             }
         }
+
+		/// <summary>
+		/// Set and return Current values of program
+		/// </summary>
+		public Calculator CurrentCalculator { get; set; }
 
 		/// <summary>
 		/// Constructor for <see cref="Project"/> class
@@ -48,7 +53,10 @@ namespace Calculator
             Number = null;
         }
 
-        public event EventHandler NumberChenged;
+		/// <summary>
+		/// Activity the event when changed value element
+		/// </summary>
+        public event EventHandler NumberChanged;
 
 		/// <summary>
 		/// Searches all calculations for a specific date
