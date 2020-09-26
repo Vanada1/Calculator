@@ -5,11 +5,29 @@ using System.Text;
 namespace Calculator
 {
 	public class Project
-	{
-		/// <summary>
-		/// Calculation list
+    {
+        private string _number;
+
+        /// <summary>
+		/// Set and return values
 		/// </summary>
-		List<Calculator> Calculators { get; set; }
+		public List<Calculator> Calculators { get; set; }
+
+        /// <summary>
+        /// Set and return values in textbox
+        /// </summary>
+        public string Number
+        {
+            get => _number;
+            set
+            {
+                if (Number != value)
+                {
+                    _number = value;
+					NumberChenged.Invoke(this, new EventArgs());
+                }
+            }
+        }
 
 		/// <summary>
 		/// Constructor for <see cref="Project"/> class
@@ -18,7 +36,8 @@ namespace Calculator
 		public Project(List<Calculator> calculators)
 		{
 			Calculators = calculators;
-		}
+            Number = null;
+        }
 
 		/// <summary>
 		/// Default constructor for <see cref="Project"/> class
@@ -26,7 +45,10 @@ namespace Calculator
 		public Project()
 		{
 			Calculators = new List<Calculator>();
-		}
+            Number = null;
+        }
+
+        public event EventHandler NumberChenged;
 
 		/// <summary>
 		/// Searches all calculations for a specific date
