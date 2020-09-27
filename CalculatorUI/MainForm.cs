@@ -15,10 +15,70 @@ namespace CalculatorUI
 	{
 		Project _project = new Project();
 
+        private void OperationValue(Operation operation)
+        {
+            if (_project.CurrentCalculator.Operation != Operation.None &&
+                _project.CurrentCalculator.FirstValue != null &&
+                ValueTextBox.Text.Length == 0)
+            {
+                _project.CurrentCalculator.Operation = operation;
+                SetLabelStatus();
+            }
+            else if (ValueTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Enter the number", "Error");
+            }
+            else
+            {
+                if (_project.CurrentCalculator.FirstValue != null)
+                {
+                    Calculate();
+                }
+
+                _project.CurrentCalculator = new Calculator();
+
+                try
+                {
+                    _project.CurrentCalculator.FirstValue = double.Parse(ValueTextBox.Text);
+                    _project.CurrentCalculator.Operation = operation;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, $"Error");
+                }
+
+                SetLabelStatus();
+            }
+		}
+
+        private void Calculate()
+        {
+            try
+            {
+                _project.CurrentCalculator.SecondValue = double.Parse(ValueTextBox.Text);
+                ValueLabel.Text += ValueTextBox.Text;
+                _project.CurrentCalculator.Calculate();
+                _project.Calculators.Add(_project.CurrentCalculator);
+                _project.CurrentCalculator.FirstValue = null;
+              ValueTextBox.Text = _project.CurrentCalculator.Result.ToString();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, $"Error");
+            }
+		}
+
 		private void OnNumberChanged(object sender, EventArgs e)
 		{
 			ValueTextBox.Text = _project.Number;
 		}
+
+        private void SetLabelStatus()
+        {
+            ValueLabel.Text = _project.CurrentCalculator.FirstValue.ToString() +
+                                   _project.GetOperation();
+            _project.Number = "";
+        }
 
 		public MainForm()
 		{
@@ -26,12 +86,12 @@ namespace CalculatorUI
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
-		{
+        {
 			_project.NumberChanged += OnNumberChanged;
-            FirstValueLabel.Text = "";
-            OperatorLabel.Text = "";
+            ValueLabel.Text = "";
 		}
-		private void ValueTextBox_TextChanged(object sender, EventArgs e)
+
+        private void ValueTextBox_TextChanged(object sender, EventArgs e)
 		{
 			_project.Number = ValueTextBox.Text;
 		}
@@ -87,67 +147,58 @@ namespace CalculatorUI
 		}
 
 		private void ButtonDot_Click(object sender, EventArgs e)
-		{
-			_project.Number += ".";
-		}
+        {
+            int index = ValueTextBox.Text.IndexOf(".");
+            if (index == -1)
+            {
+                _project.Number += ".";
+            }
+        }
 
 		private void ButtonSignСhange_Click(object sender, EventArgs e)
         {
-            _project.Number = _project.Number.Substring(0,1) != "-" ?
-                _project.Number.Insert(0, "-") : 
-                _project.Number.Replace("-", "");
+            if (_project.Number.Length != 0)
+            {
+                _project.Number = _project.Number.Substring(0, 1) != "-"
+                    ? _project.Number.Insert(0, "-")
+                    : _project.Number.Replace("-", "");
+            }
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            FirstValueLabel.Text = "";
-            OperatorLabel.Text = "";
+            ValueLabel.Text = "";
             _project.Number = "";
 			_project.CurrentCalculator = new Calculator();
         }
-
-        private void ButtonPow_Click(object sender, EventArgs e)
-		{
-			if (_project.CurrentCalculator.Operation != Operation.None &&
-                _project.CurrentCalculator.FirstNumber != null)
-            {
-                _project.CurrentCalculator.Operation = Operation.Exponentiation;
-                return;
-            }
-
-			if (ValueTextBox.Text.Length == 0)
-            {
-                MessageBox.Show($"Enter the number", $"Error");
-				return;
-            }
-
-			_project.CurrentCalculator = new Calculator();
-
-			try
-            {
-                _project.CurrentCalculator.FirstNumber = double.Parse(ValueTextBox.Text);
-                _project.CurrentCalculator.Operation = Operation.Exponentiation;
-            }
-			catch (Exception exception)
-            {
-				MessageBox.Show(exception.Message, $"Error");
-			}
-        }
-
         private void ResultButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _project.CurrentCalculator.SecondNumber = double.Parse(ValueTextBox.Text);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message, $"Error");
-            }
+            Calculate();
+        }
 
-			_project.CurrentCalculator.Calculate();
-            ValueTextBox.Text = _project.CurrentCalculator.Result.ToString();
+        private void ButtonPow_Click(object sender, EventArgs e)
+        {
+            OperationValue(Operation.Exponentiation);
+        }
 
+        private void ButtonDev_Click(object sender, EventArgs e)
+        {
+            OperationValue(Operation.Division);
+        }
+
+        private void ButtonMult_Click(object sender, EventArgs e)
+        {
+            OperationValue(Operation.Multiplication);
+        }
+
+        private void ButtonSubtraction_Click(object sender, EventArgs e)
+        {
+            OperationValue(Operation.Subtraction);
+        }
+
+        private void ButtonSum_Click(object sender, EventArgs e)
+        {
+            OperationValue(Operation.Addition);
         }
     }
 }

@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.Button1 = new System.Windows.Forms.Button();
-            this.FirstValueLabel = new System.Windows.Forms.Label();
-            this.OperatorLabel = new System.Windows.Forms.Label();
+            this.ValueLabel = new System.Windows.Forms.Label();
             this.ValueTextBox = new System.Windows.Forms.TextBox();
             this.Button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -65,30 +64,21 @@
             this.Button1.UseVisualStyleBackColor = true;
             this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // FirstValueLabel
+            // ValueLabel
             // 
-            this.FirstValueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FirstValueLabel.AutoSize = true;
-            this.FirstValueLabel.Location = new System.Drawing.Point(248, 9);
-            this.FirstValueLabel.Name = "FirstValueLabel";
-            this.FirstValueLabel.Size = new System.Drawing.Size(38, 15);
-            this.FirstValueLabel.TabIndex = 1;
-            this.FirstValueLabel.Text = "label1";
-            // 
-            // OperatorLabel
-            // 
-            this.OperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.OperatorLabel.AutoSize = true;
-            this.OperatorLabel.Location = new System.Drawing.Point(248, 41);
-            this.OperatorLabel.Name = "OperatorLabel";
-            this.OperatorLabel.Size = new System.Drawing.Size(38, 15);
-            this.OperatorLabel.TabIndex = 2;
-            this.OperatorLabel.Text = "label2";
+            this.ValueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueLabel.AutoSize = true;
+            this.ValueLabel.Location = new System.Drawing.Point(12, 21);
+            this.ValueLabel.Name = "ValueLabel";
+            this.ValueLabel.Size = new System.Drawing.Size(38, 15);
+            this.ValueLabel.TabIndex = 1;
+            this.ValueLabel.Text = "label1";
             // 
             // ValueTextBox
             // 
             this.ValueTextBox.Location = new System.Drawing.Point(12, 68);
             this.ValueTextBox.Name = "ValueTextBox";
+            this.ValueTextBox.ReadOnly = true;
             this.ValueTextBox.Size = new System.Drawing.Size(274, 23);
             this.ValueTextBox.TabIndex = 3;
             this.ValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -215,6 +205,7 @@
             this.ButtonDev.TabIndex = 0;
             this.ButtonDev.Text = "/";
             this.ButtonDev.UseVisualStyleBackColor = true;
+            this.ButtonDev.Click += new System.EventHandler(this.ButtonDev_Click);
             // 
             // ButtonMult
             // 
@@ -225,6 +216,7 @@
             this.ButtonMult.TabIndex = 0;
             this.ButtonMult.Text = "x";
             this.ButtonMult.UseVisualStyleBackColor = true;
+            this.ButtonMult.Click += new System.EventHandler(this.ButtonMult_Click);
             // 
             // ButtonNegative
             // 
@@ -235,6 +227,7 @@
             this.ButtonNegative.TabIndex = 0;
             this.ButtonNegative.Text = "-";
             this.ButtonNegative.UseVisualStyleBackColor = true;
+            this.ButtonNegative.Click += new System.EventHandler(this.ButtonSubtraction_Click);
             // 
             // ButtonSum
             // 
@@ -245,6 +238,7 @@
             this.ButtonSum.TabIndex = 0;
             this.ButtonSum.Text = "+";
             this.ButtonSum.UseVisualStyleBackColor = true;
+            this.ButtonSum.Click += new System.EventHandler(this.ButtonSum_Click);
             // 
             // ButtonPow
             // 
@@ -338,8 +332,7 @@
             this.ClientSize = new System.Drawing.Size(294, 421);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.ValueTextBox);
-            this.Controls.Add(this.OperatorLabel);
-            this.Controls.Add(this.FirstValueLabel);
+            this.Controls.Add(this.ValueLabel);
             this.MaximumSize = new System.Drawing.Size(310, 460);
             this.Name = "MainForm";
             this.Text = "Calculator";
@@ -353,8 +346,7 @@
         #endregion
 
         private System.Windows.Forms.Button Button1;
-        private System.Windows.Forms.Label FirstValueLabel;
-        private System.Windows.Forms.Label OperatorLabel;
+        private System.Windows.Forms.Label ValueLabel;
         private System.Windows.Forms.TextBox ValueTextBox;
         private System.Windows.Forms.Button Button2;
         private System.Windows.Forms.Button button3;

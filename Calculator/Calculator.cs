@@ -5,27 +5,29 @@ namespace CalculatorApp
 	/// <summary>
 	/// Main class of program 
 	/// </summary>
-	public class Calculator
-	{
-		/// <summary>
-		/// First number property
-		/// </summary>
-		public double? FirstNumber { get; set; }
+	public class Calculator:ICloneable
+    {
 
-		/// <summary>
+        /// <summary>
+        /// First number property
+        /// </summary>
+        public double? FirstValue { get; set; }
+
+        /// <summary>
 		/// Second number property
 		/// </summary>
-		public double? SecondNumber { get; set; }
+		public double? SecondValue { get; set; }
 
 		/// <summary>
 		/// Calculation <see cref="Result"/> property
 		/// </summary>
 		public double? Result { get; private set; } = 0.0;
 
-		/// <summary>
-		/// <see cref="Operation"/> property
-		/// </summary>
-		public Operation Operation { get; set; }
+        /// <summary>
+        /// <see cref="Operation"/> property
+        /// </summary>
+        public Operation Operation { get; set; }
+
 
 		/// <summary>
 		/// <see cref="TimeResult"/> property
@@ -35,25 +37,28 @@ namespace CalculatorApp
 		/// <summary>
 		/// Constructor for <see cref="Calculator"/> class
 		/// </summary>
-		/// <param name="firstNumber"></param>
-		/// <param name="secondNumber"></param>
+		/// <param name="firstValue"></param>
+		/// <param name="secondValue"></param>
 		/// <param name="operation"></param>
-		public Calculator(double firstNumber, double secondNumber,
+		public Calculator(double? firstValue, double? secondValue,
 			Operation operation)
 		{
-			FirstNumber = firstNumber;
-			SecondNumber = secondNumber;
+			FirstValue = firstValue;
+			SecondValue = secondValue;
 			Operation = operation;
 		}
 
-        public Calculator()
+        /// <summary>
+        /// Default constructor for <see cref="Calculator"/> class
+        /// </summary>
+		public Calculator()
         {
-            FirstNumber = null;
-            SecondNumber = null;
+            FirstValue = null;
+            SecondValue = null;
             Operation = Operation.None;
         }
 
-		/// <summary>
+        /// <summary>
 		/// <see cref="Calculate"/> <see cref="Result"/>
 		/// </summary>
 		public void Calculate()
@@ -62,27 +67,35 @@ namespace CalculatorApp
 			{
 				case Operation.Addition:
 				{
-					Result = FirstNumber + SecondNumber;
+					Result = FirstValue + SecondValue;
 					break;
 				}
 				case Operation.Subtraction:
 				{
-					Result = FirstNumber - SecondNumber;
+					Result = FirstValue - SecondValue;
 					break;
 				}
 				case Operation.Multiplication:
 				{
-					Result = FirstNumber * SecondNumber;
+					Result = FirstValue * SecondValue;
 					break;
 				}
 				case Operation.Division:
 				{
-					Result = FirstNumber / SecondNumber;
+					Result = FirstValue / SecondValue;
 					break;
 				}
 				case Operation.Exponentiation:
 				{
-					Result = Math.Pow((double)FirstNumber, (double)SecondNumber);
+                    if (FirstValue != null && SecondValue != null)
+                    {
+                        Result = Math.Pow((double)FirstValue, (double)SecondValue);
+                    }
+                    else
+                    {
+                        throw new Exception(nameof(FirstValue) + "  null or " +
+                                            nameof(SecondValue) + " null");
+                    }
 					break;
 				}
 				default:
@@ -139,8 +152,13 @@ namespace CalculatorApp
 					}
 			}
 
-			return ($"{FirstNumber} {operation} {SecondNumber} = {Result} " +
+			return ($"{FirstValue} {operation} {SecondValue} = {Result} " +
 				TimeResult.ToString());
 		}
-	}
+
+        public object Clone()
+        {
+            return new Calculator(FirstValue, SecondValue, Operation);
+        }
+    }
 }

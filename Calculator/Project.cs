@@ -24,7 +24,7 @@ namespace CalculatorApp
                 if (Number != value)
                 {
                     _number = value;
-					NumberChanged.Invoke(this, new EventArgs());
+					NumberChanged?.Invoke(this, new EventArgs());
                 }
             }
         }
@@ -41,17 +41,17 @@ namespace CalculatorApp
 		public Project(List<Calculator> calculators)
 		{
 			Calculators = calculators;
-            Number = null;
+            Number = "";
 			CurrentCalculator = new Calculator();
-		}
+        }
 
-		/// <summary>
+        /// <summary>
 		/// Default constructor for <see cref="Project"/> class
 		/// </summary>
 		public Project()
 		{
 			Calculators = new List<Calculator>();
-            Number = null;
+            Number = "";
             CurrentCalculator = new Calculator();
         }
 
@@ -60,7 +60,7 @@ namespace CalculatorApp
 		/// </summary>
 		public event EventHandler NumberChanged;
 
-		/// <summary>
+        /// <summary>
 		/// Searches all calculations for a specific date
 		/// </summary>
 		/// <param name="time"> date for search</param>
@@ -80,5 +80,45 @@ namespace CalculatorApp
 
 			return foundCalculators;
 		}
-	}
+
+        public string GetOperation()
+        {
+            string operation;
+
+            switch (CurrentCalculator.Operation)
+            {
+                case Operation.Addition:
+                {
+                    operation = "+";
+                    break;
+                }
+                case Operation.Subtraction:
+                {
+                    operation = "-";
+                    break;
+                }
+                case Operation.Multiplication:
+                {
+                    operation = "*";
+                    break;
+                }
+                case Operation.Division:
+                {
+                    operation = "/";
+                    break;
+                }
+                case Operation.Exponentiation:
+                {
+                    operation = "^"; ;
+                    break;
+                }
+                default:
+                {
+                    throw new ArgumentException("Unknown command");
+                }
+            }
+
+            return operation;
+        }
+    }
 }
