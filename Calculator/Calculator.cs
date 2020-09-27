@@ -21,7 +21,7 @@ namespace CalculatorApp
 		/// <summary>
 		/// Calculation <see cref="Result"/> property
 		/// </summary>
-		public double? Result { get; private set; } = 0.0;
+		public double? Result { get; set; } = 0.0;
 
         /// <summary>
         /// <see cref="Operation"/> property
@@ -32,7 +32,7 @@ namespace CalculatorApp
 		/// <summary>
 		/// <see cref="TimeResult"/> property
 		/// </summary>
-		public DateTime TimeResult { get; private set; }
+		public DateTime TimeResult { get; set; }
 
 		/// <summary>
 		/// Constructor for <see cref="Calculator"/> class
@@ -40,13 +40,15 @@ namespace CalculatorApp
 		/// <param name="firstValue"></param>
 		/// <param name="secondValue"></param>
 		/// <param name="operation"></param>
-		public Calculator(double? firstValue, double? secondValue,
-			Operation operation)
+		Calculator(double? firstValue, double? secondValue,
+			Operation operation, double? result, DateTime timeResult)
 		{
 			FirstValue = firstValue;
 			SecondValue = secondValue;
 			Operation = operation;
-		}
+            Result = result;
+            TimeResult = timeResult;
+        }
 
         /// <summary>
         /// Default constructor for <see cref="Calculator"/> class
@@ -113,7 +115,7 @@ namespace CalculatorApp
 		}
 
 		/// <summary>
-		/// Override metod <see cref="ToString"/>
+		/// Override method <see cref="ToString"/>
 		/// </summary>
 		/// <returns> <see cref="string"/> class</returns>
 		public override string ToString()
@@ -148,17 +150,17 @@ namespace CalculatorApp
 					}
 				default:
 					{
-						throw new ArgumentException("Unknown comand");
+						throw new ArgumentException("Unknown command");
 					}
 			}
 
 			return ($"{FirstValue} {operation} {SecondValue} = {Result} " +
-				TimeResult.ToString());
+				"Date: " + TimeResult.ToString());
 		}
 
         public object Clone()
         {
-            return new Calculator(FirstValue, SecondValue, Operation);
+            return new Calculator(FirstValue, SecondValue, Operation, Result, TimeResult);
         }
     }
 }

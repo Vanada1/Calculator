@@ -58,8 +58,10 @@ namespace CalculatorUI
                 _project.CurrentCalculator.SecondValue = double.Parse(ValueTextBox.Text);
                 ValueLabel.Text += ValueTextBox.Text;
                 _project.CurrentCalculator.Calculate();
-                _project.Calculators.Add(_project.CurrentCalculator);
+                _project.Calculators.Add(_project.CurrentCalculator.Clone() as Calculator);
                 _project.CurrentCalculator.FirstValue = null;
+                _project.Number = "";
+                ProjectManager.SaveProject(_project);
               ValueTextBox.Text = _project.CurrentCalculator.Result.ToString();
             }
             catch (Exception exception)
@@ -87,14 +89,15 @@ namespace CalculatorUI
 
 		private void Form1_Load(object sender, EventArgs e)
         {
+            _project = ProjectManager.ReadProject();
 			_project.NumberChanged += OnNumberChanged;
             ValueLabel.Text = "";
 		}
 
-        private void ValueTextBox_TextChanged(object sender, EventArgs e)
-		{
-			_project.Number = ValueTextBox.Text;
-		}
+  //      private void ValueTextBox_TextChanged(object sender, EventArgs e)
+		//{
+		//	_project.Number = ValueTextBox.Text;
+		//}
 
 		private void Button1_Click(object sender, EventArgs e)
 		{
@@ -169,6 +172,7 @@ namespace CalculatorUI
         {
             ValueLabel.Text = "";
             _project.Number = "";
+            ValueTextBox.Text = "";
 			_project.CurrentCalculator = new Calculator();
         }
         private void ResultButton_Click(object sender, EventArgs e)
@@ -199,6 +203,21 @@ namespace CalculatorUI
         private void ButtonSum_Click(object sender, EventArgs e)
         {
             OperationValue(Operation.Addition);
+        }
+
+        private void HistoryButton_Click(object sender, EventArgs e)
+        {
+            var addForm = new HistoryForm();
+            addForm.Calculators = _project.Calculators;
+            addForm.ShowDialog();
+        }
+
+        private void MainForm_FormClosing(Object sender,
+            FormClosingEventArgs e)
+        {
+            _project.CurrentCalculator = new Calculator();
+            _project.Number = "";
+            ProjectManager.SaveProject(_project);
         }
     }
 }

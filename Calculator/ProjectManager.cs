@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 
 namespace CalculatorApp
 {
-	class ProjectManager
+    public class ProjectManager
 	{
 		/// <summary>
 		/// File name

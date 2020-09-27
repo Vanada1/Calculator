@@ -82,7 +82,7 @@
             this.ValueTextBox.Size = new System.Drawing.Size(274, 23);
             this.ValueTextBox.TabIndex = 3;
             this.ValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.ValueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
+//            this.ValueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
             // 
             // Button2
             // 
@@ -263,6 +263,7 @@
             this.HistoryButton.TabIndex = 0;
             this.HistoryButton.Text = "History";
             this.HistoryButton.UseVisualStyleBackColor = true;
+            this.HistoryButton.Click += new System.EventHandler(this.HistoryButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -336,6 +337,7 @@
             this.MaximumSize = new System.Drawing.Size(310, 460);
             this.Name = "MainForm";
             this.Text = "Calculator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
