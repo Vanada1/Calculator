@@ -150,6 +150,11 @@ namespace CalculatorUI
 
 		private void Button0_Click(object sender, EventArgs e)
 		{
+            if(_project.Number.Substring(0) == "0" && 
+               _project.Number.Substring(1) != ".")
+            {
+                return;
+            }
 			_project.Number += "0";
 		}
 
@@ -224,5 +229,10 @@ namespace CalculatorUI
             _project.Number = "";
             ProjectManager.SaveProject(_project);
         }
-    }
+
+		private void ValueTextBox_TextChanged(object sender, EventArgs e)
+		{
+			_project.Number = ValueTextBox.Text;
+		}
+	}
 }

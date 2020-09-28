@@ -82,6 +82,7 @@
 			this.ValueTextBox.Size = new System.Drawing.Size(274, 23);
 			this.ValueTextBox.TabIndex = 3;
 			this.ValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.ValueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
 			// 
 			// Button2
 			// 
