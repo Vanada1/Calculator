@@ -56,15 +56,24 @@ namespace CalculatorUI
         {
             try
             {
-                _project.CurrentCalculator.SecondValue = double.Parse(ValueTextBox.Text);
-                ValueLabel.Text += ValueTextBox.Text;
-                ValueLabel.ForeColor = Color.Black;
+	            if (_project.CurrentCalculator.SecondValue == null)
+	            {
+		            _project.CurrentCalculator.SecondValue = double.Parse(ValueTextBox.Text);
+	            }
+	            else
+	            {
+		            _project.CurrentCalculator.FirstValue = 
+			            _project.CurrentCalculator.Result;
+		            SetLabelStatus();
+	            }
                 _project.CurrentCalculator.Calculate();
                 _project.Calculators.Add(_project.CurrentCalculator.Clone() as Calculator);
                 _project.CurrentCalculator.FirstValue = null;
+                ValueLabel.Text += _project.CurrentCalculator.SecondValue.ToString();
+                ValueLabel.ForeColor = Color.Black;
                 _project.Number = "";
                 ProjectManager.SaveProject(_project);
-              ValueTextBox.Text = _project.CurrentCalculator.Result.ToString();
+                ValueTextBox.Text = _project.CurrentCalculator.Result.ToString();
             }
             catch (Exception exception)
             {
