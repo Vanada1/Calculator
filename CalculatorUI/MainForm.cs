@@ -26,7 +26,8 @@ namespace CalculatorUI
             }
             else if (ValueTextBox.Text.Length == 0)
             {
-                MessageBox.Show("Enter the number", "Error");
+	            ValueLabel.Text = "Enter the number";
+	            ValueLabel.ForeColor = Color.Brown;
             }
             else
             {
@@ -57,6 +58,7 @@ namespace CalculatorUI
             {
                 _project.CurrentCalculator.SecondValue = double.Parse(ValueTextBox.Text);
                 ValueLabel.Text += ValueTextBox.Text;
+                ValueLabel.ForeColor = Color.Black;
                 _project.CurrentCalculator.Calculate();
                 _project.Calculators.Add(_project.CurrentCalculator.Clone() as Calculator);
                 _project.CurrentCalculator.FirstValue = null;
@@ -79,6 +81,7 @@ namespace CalculatorUI
         {
             ValueLabel.Text = _project.CurrentCalculator.FirstValue.ToString() +
                                    _project.GetOperation();
+            ValueLabel.ForeColor = Color.Black;
             _project.Number = "";
         }
 
@@ -92,14 +95,15 @@ namespace CalculatorUI
             _project = ProjectManager.ReadProject();
 			_project.NumberChanged += OnNumberChanged;
             ValueLabel.Text = "";
-		}
+            ValueLabel.ForeColor = Color.Black;
+        }
 
-  //      private void ValueTextBox_TextChanged(object sender, EventArgs e)
-		//{
-		//	_project.Number = ValueTextBox.Text;
-		//}
+        //      private void ValueTextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //	_project.Number = ValueTextBox.Text;
+        //}
 
-		private void Button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
 		{
 			_project.Number += "1";
 		}
@@ -171,6 +175,7 @@ namespace CalculatorUI
         private void ClearButton_Click(object sender, EventArgs e)
         {
             ValueLabel.Text = "";
+            ValueLabel.ForeColor = Color.Black;
             _project.Number = "";
             ValueTextBox.Text = "";
 			_project.CurrentCalculator = new Calculator();
